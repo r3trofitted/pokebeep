@@ -1,9 +1,6 @@
 require 'rails_helper'
-require 'public_api'
 
-RSpec.describe 'api validation', type: :request do
-  include PublicApi
-
+RSpec.describe 'api validation' do
   let(:now) { Time.now.to_i }
 
   context 'when posting beep with wrong request params' do

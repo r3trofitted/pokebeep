@@ -1,9 +1,6 @@
 require 'rails_helper'
-require 'public_api'
 
-RSpec.describe 'public api', type: :request do
-  include PublicApi
-
+RSpec.describe 'public api' do
   let(:first_pokemon) { 1 }
   let(:second_pokemon) { 2 }
 

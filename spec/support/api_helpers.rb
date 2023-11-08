@@ -1,4 +1,4 @@
-module PublicApi
+module ApiHelpers
   def given_beep(pokemon_id: 1, timestamp: Time.zone.now, kind: :in)
     t = to_unix(timestamp)
     post_beep(pokemon_id: pokemon_id, timestamp: t, kind: kind)
