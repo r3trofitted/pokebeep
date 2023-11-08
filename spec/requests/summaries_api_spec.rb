@@ -1,6 +1,4 @@
-require 'rails_helper'
-
-RSpec.describe 'public api' do
+RSpec.describe 'Summaries API' do
   describe 'GET /summaries/{pokemon_id}/{from}/{to}' do
     let(:first_pokemon) { 1 }
     let(:second_pokemon) { 2 }
@@ -57,6 +55,26 @@ RSpec.describe 'public api' do
                                   presence_hours: 0.0,
                                   problematic_dates: ['2019-05-01', '2019-05-02']
                                 })
+    end
+    
+    context 'when getting summary with wrong request params' do
+      it 'returns 400 status code' do
+        get_summary(1, 'bad', '2019-01-01')
+    
+        expect(response.status).to eq(400)
+      end
+    
+      it 'returns 400 status code' do
+        get_summary(1, '2019-01-01', 'bad')
+    
+        expect(response.status).to eq(400)
+      end
+    
+      it 'returns 400 status code' do
+        get_summary('bad', '2019-01-01', '2019-02-02')
+    
+        expect(response.status).to eq(400)
+      end
     end
   end
 end
