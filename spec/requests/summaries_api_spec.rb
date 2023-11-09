@@ -61,19 +61,19 @@ RSpec.describe 'Summaries API' do
     
     describe "validations" do
       specify 'passing an invalid {from} parameter returns a 400 status code ' do
-        get_summary(1, 'bad', '2019-01-01')
+        get('/summaries/1/bad/2019-01-01')
     
         expect(response.status).to eq(400)
       end
     
       specify 'passing an invalid {to} parameter returns a 400 status code' do
-        get_summary(1, '2019-01-01', 'bad')
+        get('/summaries/1/2019-01-01/bad')
     
         expect(response.status).to eq(400)
       end
     
       specify 'passing an invalid {pokemon_id} parameter returns a 400 status code' do
-        get_summary('bad', '2019-01-01', '2019-02-02')
+        get('/summaries/bad/2019-01-01/2019-02-02')
     
         expect(response.status).to eq(400)
       end

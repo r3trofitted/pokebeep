@@ -1,22 +1,14 @@
 module ApiHelpers
   def given_beep(pokemon_id: 1, timestamp: Time.zone.now, kind: :in)
     t = to_unix(timestamp)
-    post_beep(pokemon_id: pokemon_id, timestamp: t, kind: kind)
+    post('/beeps', params: { pokemon_id:, timestamp: t, kind: })
     expect(response.status).to eq(200)
-  end
-
-  def post_beep(params = {})
-    post('/beeps', params: params)
   end
 
   def summary(pokemon_id:, from:, to:)
-    get_summary(pokemon_id, from, to)
+    get("/summaries/#{pokemon_id}/#{from}/#{to}")
     expect(response.status).to eq(200)
     JSON.parse(response.body).symbolize_keys
-  end
-
-  def get_summary(pokemon_id, from, to)
-    get("/summaries/#{pokemon_id}/#{from}/#{to}")
   end
 
   private
