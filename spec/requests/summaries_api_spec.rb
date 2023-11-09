@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 RSpec.describe 'Summaries API' do
   describe 'GET /summaries/{pokemon_id}/{from}/{to}' do
     let(:first_pokemon) { 1 }
@@ -57,20 +59,20 @@ RSpec.describe 'Summaries API' do
                                 })
     end
     
-    context 'when getting summary with wrong request params' do
-      it 'returns 400 status code' do
+    describe "validations" do
+      specify 'passing an invalid {from} parameter returns a 400 status code ' do
         get_summary(1, 'bad', '2019-01-01')
     
         expect(response.status).to eq(400)
       end
     
-      it 'returns 400 status code' do
+      specify 'passing an invalid {to} parameter returns a 400 status code' do
         get_summary(1, '2019-01-01', 'bad')
     
         expect(response.status).to eq(400)
       end
     
-      it 'returns 400 status code' do
+      specify 'passing an invalid {pokemon_id} parameter returns a 400 status code' do
         get_summary('bad', '2019-01-01', '2019-02-02')
     
         expect(response.status).to eq(400)
