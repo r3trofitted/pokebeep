@@ -11,7 +11,8 @@ RSpec.describe 'Summaries API' do
       given_beep(pokemon_id: first_pokemon, timestamp: '2019-05-02 08:00', kind: :in)
       given_beep(pokemon_id: first_pokemon, timestamp: '2019-05-02 16:00', kind: :out)
   
-      summary = summary(pokemon_id: first_pokemon, from: '2019-05-01', to: '2019-05-30')
+      get("/summaries/#{first_pokemon}/2019-05-01/2019-05-30")
+      summary = JSON.parse(response.body).symbolize_keys
   
       expect(summary).to include({
                                   pokemon_id: first_pokemon,
@@ -25,7 +26,8 @@ RSpec.describe 'Summaries API' do
       given_beep(pokemon_id: first_pokemon, timestamp: '2019-05-01 08:10:00:050', kind: :in)
       given_beep(pokemon_id: first_pokemon, timestamp: '2019-05-01 16:00:01:070', kind: :out)
   
-      summary = summary(pokemon_id: first_pokemon, from: '2019-05-01', to: '2019-05-01')
+      get("/summaries/#{first_pokemon}/2019-05-01/2019-05-01")
+      summary = JSON.parse(response.body).symbolize_keys
   
       expect(summary[:presence_hours]).to eq(7.83)
     end
@@ -34,8 +36,9 @@ RSpec.describe 'Summaries API' do
       given_beep(pokemon_id: first_pokemon, timestamp: '2019-05-01 08:00', kind: :in)
       given_beep(pokemon_id: first_pokemon, timestamp: '2019-05-02 08:00', kind: :in)
       given_beep(pokemon_id: first_pokemon, timestamp: '2019-05-02 16:00', kind: :out)
-  
-      summary = summary(pokemon_id: first_pokemon, from: '2019-05-01', to: '2019-05-30')
+      
+      get("/summaries/#{first_pokemon}/2019-05-01/2019-05-30")
+      summary = JSON.parse(response.body).symbolize_keys
   
       expect(summary).to include({
                                   pokemon_id: first_pokemon,
@@ -49,7 +52,8 @@ RSpec.describe 'Summaries API' do
       given_beep(pokemon_id: first_pokemon, timestamp: '2019-05-01 08:00', kind: :in)
       given_beep(pokemon_id: first_pokemon, timestamp: '2019-05-02 16:00', kind: :out)
   
-      summary = summary(pokemon_id: first_pokemon, from: '2019-05-01', to: '2019-05-30')
+      get("/summaries/#{first_pokemon}/2019-05-01/2019-05-30")
+      summary = JSON.parse(response.body).symbolize_keys
   
       expect(summary).to include({
                                   pokemon_id: first_pokemon,
