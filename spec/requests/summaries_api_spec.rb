@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe 'Summaries API' do
+  def given_beep(pokemon_id: 1, timestamp: Time.zone.now, kind: :in)
+    Beep.create! pokemon_id:, kind:, timestamp: Time.parse(timestamp).to_i
+  end
+  
   describe 'GET /summaries/{pokemon_id}/{from}/{to}' do
     it 'generates summary based on beeps' do
       given_beep(pokemon_id: 1, timestamp: '2019-05-01 08:00', kind: :in)
